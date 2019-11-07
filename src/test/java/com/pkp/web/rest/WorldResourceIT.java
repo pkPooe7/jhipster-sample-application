@@ -36,6 +36,9 @@ public class WorldResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_SYSTEM = "AAAAAAAAAA";
+    private static final String UPDATED_SYSTEM = "BBBBBBBBBB";
+
     @Autowired
     private WorldRepository worldRepository;
 
@@ -78,7 +81,8 @@ public class WorldResourceIT {
      */
     public static World createEntity(EntityManager em) {
         World world = new World()
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .system(DEFAULT_SYSTEM);
         return world;
     }
     /**
@@ -89,7 +93,8 @@ public class WorldResourceIT {
      */
     public static World createUpdatedEntity(EntityManager em) {
         World world = new World()
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .system(UPDATED_SYSTEM);
         return world;
     }
 
@@ -114,6 +119,7 @@ public class WorldResourceIT {
         assertThat(worldList).hasSize(databaseSizeBeforeCreate + 1);
         World testWorld = worldList.get(worldList.size() - 1);
         assertThat(testWorld.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testWorld.getSystem()).isEqualTo(DEFAULT_SYSTEM);
     }
 
     @Test
@@ -156,6 +162,24 @@ public class WorldResourceIT {
 
     @Test
     @Transactional
+    public void checkSystemIsRequired() throws Exception {
+        int databaseSizeBeforeTest = worldRepository.findAll().size();
+        // set the field null
+        world.setSystem(null);
+
+        // Create the World, which fails.
+
+        restWorldMockMvc.perform(post("/api/worlds")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(world)))
+            .andExpect(status().isBadRequest());
+
+        List<World> worldList = worldRepository.findAll();
+        assertThat(worldList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllWorlds() throws Exception {
         // Initialize the database
         worldRepository.saveAndFlush(world);
@@ -165,7 +189,8 @@ public class WorldResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(world.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].system").value(hasItem(DEFAULT_SYSTEM)));
     }
     
     @Test
@@ -179,7 +204,8 @@ public class WorldResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(world.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.system").value(DEFAULT_SYSTEM));
     }
 
     @Test
@@ -203,7 +229,8 @@ public class WorldResourceIT {
         // Disconnect from session so that the updates on updatedWorld are not directly saved in db
         em.detach(updatedWorld);
         updatedWorld
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .system(UPDATED_SYSTEM);
 
         restWorldMockMvc.perform(put("/api/worlds")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -215,6 +242,7 @@ public class WorldResourceIT {
         assertThat(worldList).hasSize(databaseSizeBeforeUpdate);
         World testWorld = worldList.get(worldList.size() - 1);
         assertThat(testWorld.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testWorld.getSystem()).isEqualTo(UPDATED_SYSTEM);
     }
 
     @Test

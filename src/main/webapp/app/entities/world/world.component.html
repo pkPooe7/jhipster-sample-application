@@ -20,6 +20,8 @@
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
             <th scope="col" ><span jhiTranslate="sampleApp.world.name">Name</span></th>
+            <th scope="col" ><span jhiTranslate="sampleApp.world.system">System</span></th>
+            <th scope="col" ><span jhiTranslate="sampleApp.world.homeSystem">Home System</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -27,6 +29,12 @@
             <tr *ngFor="let world of worlds ;trackBy: trackId">
                 <td><a [routerLink]="['/world', world.id, 'view' ]">{{world.id}}</a></td>
                 <td>{{world.name}}</td>
+                <td>{{world.system}}</td>
+                <td>
+                    <div *ngIf="world.homeSystem">
+                        <a [routerLink]="['/solar-system', world.homeSystem?.id, 'view' ]" >{{world.homeSystem?.system}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

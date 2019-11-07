@@ -20,6 +20,9 @@
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
             <th scope="col" ><span jhiTranslate="sampleApp.alien.name">Name</span></th>
+            <th scope="col" ><span jhiTranslate="sampleApp.alien.species">Species</span></th>
+            <th scope="col" ><span jhiTranslate="sampleApp.alien.planet">Planet</span></th>
+            <th scope="col" ><span jhiTranslate="sampleApp.alien.catergory">Catergory</span></th>
             <th scope="col" ><span jhiTranslate="sampleApp.alien.homeWorld">Home World</span></th>
             <th scope="col"></th>
             </tr>
@@ -28,9 +31,16 @@
             <tr *ngFor="let alien of aliens ;trackBy: trackId">
                 <td><a [routerLink]="['/alien', alien.id, 'view' ]">{{alien.id}}</a></td>
                 <td>{{alien.name}}</td>
+                <td>{{alien.species}}</td>
+                <td>{{alien.planet}}</td>
+                <td>
+                    <div *ngIf="alien.catergory">
+                        <a [routerLink]="['/classification', alien.catergory?.id, 'view' ]" >{{alien.catergory?.species}}</a>
+                    </div>
+                </td>
                 <td>
                     <div *ngIf="alien.homeWorld">
-                        <a [routerLink]="['/world', alien.homeWorld?.id, 'view' ]" >{{alien.homeWorld?.name}}</a>
+                        <a [routerLink]="['/world', alien.homeWorld?.id, 'view' ]" >{{alien.homeWorld?.planet}}</a>
                     </div>
                 </td>
                 <td class="text-right">

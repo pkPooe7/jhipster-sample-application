@@ -1,0 +1,26 @@
+{
+  "sampleApp": {
+    "classification": {
+      "home": {
+        "title": "Classifications",
+        "createLabel": "Maak een nieuwe Classification",
+        "createOrEditLabel": "Maak of wijzig een Classification",
+        "notFound": "No Classifications found"
+      },
+      "created": "A new Classification is created with identifier {{ param }}",
+      "updated": "A Classification is updated with identifier {{ param }}",
+      "deleted": "A Classification is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Classification {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Classification"
+      },
+      "name": "Name",
+      "handed": "Handed",
+      "dominantHand": "Dominant Hand",
+      "alien": "Alien",
+      "raceName": "Race Name"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "sampleApp": {
+    "technology": {
+      "home": {
+        "title": "Technologies",
+        "createLabel": "Maak een nieuwe Technology",
+        "createOrEditLabel": "Maak of wijzig een Technology",
+        "notFound": "No Technologies found"
+      },
+      "created": "A new Technology is created with identifier {{ param }}",
+      "updated": "A Technology is updated with identifier {{ param }}",
+      "deleted": "A Technology is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Technology {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Technology"
+      },
+      "name": "Name",
+      "aquired": "Aquired",
+      "speci": "Speci",
+      "speciesTech": "Species Tech"
+    }
+  }
+}

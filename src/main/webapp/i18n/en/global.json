@@ -9,6 +9,10 @@
         "main": "Entities",
         "alien": "Alien",
         "world": "World",
+        "solarSystem": "Solar System",
+        "classification": "Classification",
+        "technology": "Technology",
+        "dominantHand": "Dominant Hand",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

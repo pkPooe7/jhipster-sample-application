@@ -47,6 +47,14 @@ public class CacheConfiguration {
             createCache(cm, com.pkp.domain.Alien.class.getName());
             createCache(cm, com.pkp.domain.World.class.getName());
             createCache(cm, com.pkp.domain.World.class.getName() + ".aliens");
+            createCache(cm, com.pkp.domain.World.class.getName() + ".alienWorlds");
+            createCache(cm, com.pkp.domain.SolarSystem.class.getName());
+            createCache(cm, com.pkp.domain.SolarSystem.class.getName() + ".worldOrigins");
+            createCache(cm, com.pkp.domain.Classification.class.getName());
+            createCache(cm, com.pkp.domain.Classification.class.getName() + ".raceNames");
+            createCache(cm, com.pkp.domain.Technology.class.getName());
+            createCache(cm, com.pkp.domain.Technology.class.getName() + ".speciesTeches");
+            createCache(cm, com.pkp.domain.DominantHand.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

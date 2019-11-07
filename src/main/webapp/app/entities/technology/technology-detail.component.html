@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="technology">
+            <h2><span jhiTranslate="sampleApp.technology.detail.title">Technology</span> {{technology.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sampleApp.technology.name">Name</span></dt>
+                <dd>
+                    <span>{{technology.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="sampleApp.technology.aquired">Aquired</span></dt>
+                <dd>
+                    <span>{{technology.aquired}}</span>
+                </dd>
+                <dt><span jhiTranslate="sampleApp.technology.speci">Speci</span></dt>
+                <dd>
+                    <span>{{technology.speci}}</span>
+                </dd>
+                <dt><span jhiTranslate="sampleApp.technology.speciesTech">Species Tech</span></dt>
+                <dd>
+                    <span *ngFor="let speciesTech of technology.speciesTeches; let last = last">
+                        <a [routerLink]="['/classification', speciesTech?.id, 'view' ]">{{speciesTech.speci}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/technology', technology.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

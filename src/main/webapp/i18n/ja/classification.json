@@ -1,0 +1,26 @@
+{
+  "sampleApp": {
+    "classification": {
+      "home": {
+        "title": "Classifications",
+        "createLabel": "Classification を追加",
+        "createOrEditLabel": "Classificationを追加または編集",
+        "notFound": "No Classifications found"
+      },
+      "created": "A new Classification is created with identifier {{ param }}",
+      "updated": "A Classification is updated with identifier {{ param }}",
+      "deleted": "A Classification is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Classification {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Classification"
+      },
+      "name": "Name",
+      "handed": "Handed",
+      "dominantHand": "Dominant Hand",
+      "alien": "Alien",
+      "raceName": "Race Name"
+    }
+  }
+}

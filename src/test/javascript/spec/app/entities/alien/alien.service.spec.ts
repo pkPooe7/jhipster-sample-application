@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(AlienService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Alien(0, 'AAAAAAA');
+      elemDefault = new Alien(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -56,7 +56,9 @@ describe('Service Tests', () => {
       it('should update a Alien', () => {
         const returnedFromService = Object.assign(
           {
-            name: 'BBBBBB'
+            name: 'BBBBBB',
+            species: 'BBBBBB',
+            planet: 'BBBBBB'
           },
           elemDefault
         );
@@ -74,7 +76,9 @@ describe('Service Tests', () => {
       it('should return a list of Alien', () => {
         const returnedFromService = Object.assign(
           {
-            name: 'BBBBBB'
+            name: 'BBBBBB',
+            species: 'BBBBBB',
+            planet: 'BBBBBB'
           },
           elemDefault
         );

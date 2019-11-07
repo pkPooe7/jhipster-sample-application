@@ -17,6 +17,9 @@
         "title": "Alien"
       },
       "name": "Name",
+      "species": "Species",
+      "planet": "Planet",
+      "catergory": "Catergory",
       "homeWorld": "Home World"
     }
   }

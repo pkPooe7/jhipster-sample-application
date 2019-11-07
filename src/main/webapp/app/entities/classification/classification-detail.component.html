@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="classification">
+            <h2><span jhiTranslate="sampleApp.classification.detail.title">Classification</span> {{classification.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sampleApp.classification.name">Name</span></dt>
+                <dd>
+                    <span>{{classification.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="sampleApp.classification.handed">Handed</span></dt>
+                <dd>
+                    <span>{{classification.handed}}</span>
+                </dd>
+                <dt><span jhiTranslate="sampleApp.classification.dominantHand">Dominant Hand</span></dt>
+                <dd>
+                    <div *ngIf="classification.dominantHand">
+                        <a [routerLink]="['/dominant-hand', classification.dominantHand?.id, 'view']">{{classification.dominantHand?.handed}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/classification', classification.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

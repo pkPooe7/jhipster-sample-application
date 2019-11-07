@@ -1,4 +1,5 @@
 package com.pkp.domain;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -28,9 +29,18 @@ public class World implements Serializable {
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
+    @NotNull
+    @Size(max = 50)
+    @Column(name = "jhi_system", length = 50, nullable = false)
+    private String system;
+
     @OneToMany(mappedBy = "homeWorld")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Alien> aliens = new HashSet<>();
+    private Set<Alien> alienWorlds = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("worldOrigins")
+    private SolarSystem homeSystem;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -54,29 +64,55 @@ public class World implements Serializable {
         this.name = name;
     }
 
-    public Set<Alien> getAliens() {
-        return aliens;
+    public String getSystem() {
+        return system;
     }
 
-    public World aliens(Set<Alien> aliens) {
-        this.aliens = aliens;
+    public World system(String system) {
+        this.system = system;
         return this;
     }
 
-    public World addAlien(Alien alien) {
-        this.aliens.add(alien);
+    public void setSystem(String system) {
+        this.system = system;
+    }
+
+    public Set<Alien> getAlienWorlds() {
+        return alienWorlds;
+    }
+
+    public World alienWorlds(Set<Alien> aliens) {
+        this.alienWorlds = aliens;
+        return this;
+    }
+
+    public World addAlienWorld(Alien alien) {
+        this.alienWorlds.add(alien);
         alien.setHomeWorld(this);
         return this;
     }
 
-    public World removeAlien(Alien alien) {
-        this.aliens.remove(alien);
+    public World removeAlienWorld(Alien alien) {
+        this.alienWorlds.remove(alien);
         alien.setHomeWorld(null);
         return this;
     }
 
-    public void setAliens(Set<Alien> aliens) {
-        this.aliens = aliens;
+    public void setAlienWorlds(Set<Alien> aliens) {
+        this.alienWorlds = aliens;
+    }
+
+    public SolarSystem getHomeSystem() {
+        return homeSystem;
+    }
+
+    public World homeSystem(SolarSystem solarSystem) {
+        this.homeSystem = solarSystem;
+        return this;
+    }
+
+    public void setHomeSystem(SolarSystem solarSystem) {
+        this.homeSystem = solarSystem;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -101,6 +137,7 @@ public class World implements Serializable {
         return "World{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", system='" + getSystem() + "'" +
             "}";
     }
 }

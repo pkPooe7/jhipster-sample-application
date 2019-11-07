@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(WorldService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new World(0, 'AAAAAAA');
+      elemDefault = new World(0, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -56,7 +56,8 @@ describe('Service Tests', () => {
       it('should update a World', () => {
         const returnedFromService = Object.assign(
           {
-            name: 'BBBBBB'
+            name: 'BBBBBB',
+            system: 'BBBBBB'
           },
           elemDefault
         );
@@ -74,7 +75,8 @@ describe('Service Tests', () => {
       it('should return a list of World', () => {
         const returnedFromService = Object.assign(
           {
-            name: 'BBBBBB'
+            name: 'BBBBBB',
+            system: 'BBBBBB'
           },
           elemDefault
         );

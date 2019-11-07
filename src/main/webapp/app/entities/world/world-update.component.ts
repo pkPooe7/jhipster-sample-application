@@ -5,8 +5,12 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { JhiAlertService } from 'ng-jhipster';
 import { IWorld, World } from 'app/shared/model/world.model';
 import { WorldService } from './world.service';
+import { ISolarSystem } from 'app/shared/model/solar-system.model';
+import { SolarSystemService } from 'app/entities/solar-system/solar-system.service';
 
 @Component({
   selector: 'jhi-world-update',
@@ -15,24 +19,43 @@ import { WorldService } from './world.service';
 export class WorldUpdateComponent implements OnInit {
   isSaving: boolean;
 
+  solarsystems: ISolarSystem[];
+
   editForm = this.fb.group({
     id: [],
-    name: [null, [Validators.required, Validators.maxLength(50)]]
+    name: [null, [Validators.required, Validators.maxLength(50)]],
+    system: [null, [Validators.required, Validators.maxLength(50)]],
+    homeSystem: []
   });
 
-  constructor(protected worldService: WorldService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected jhiAlertService: JhiAlertService,
+    protected worldService: WorldService,
+    protected solarSystemService: SolarSystemService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ world }) => {
       this.updateForm(world);
     });
+    this.solarSystemService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<ISolarSystem[]>) => mayBeOk.ok),
+        map((response: HttpResponse<ISolarSystem[]>) => response.body)
+      )
+      .subscribe((res: ISolarSystem[]) => (this.solarsystems = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(world: IWorld) {
     this.editForm.patchValue({
       id: world.id,
-      name: world.name
+      name: world.name,
+      system: world.system,
+      homeSystem: world.homeSystem
     });
   }
 
@@ -54,7 +77,9 @@ export class WorldUpdateComponent implements OnInit {
     return {
       ...new World(),
       id: this.editForm.get(['id']).value,
-      name: this.editForm.get(['name']).value
+      name: this.editForm.get(['name']).value,
+      system: this.editForm.get(['system']).value,
+      homeSystem: this.editForm.get(['homeSystem']).value
     };
   }
 
@@ -69,5 +94,12 @@ export class WorldUpdateComponent implements OnInit {
 
   protected onSaveError() {
     this.isSaving = false;
+  }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackSolarSystemById(index: number, item: ISolarSystem) {
+    return item.id;
   }
 }

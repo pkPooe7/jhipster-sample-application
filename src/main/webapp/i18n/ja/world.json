@@ -17,7 +17,9 @@
         "title": "World"
       },
       "name": "Name",
-      "alien": "Alien"
+      "system": "System",
+      "alienWorld": "Alien World",
+      "homeSystem": "Home System"
     }
   }
 }

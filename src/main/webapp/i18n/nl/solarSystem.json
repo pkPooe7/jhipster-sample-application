@@ -1,0 +1,24 @@
+{
+  "sampleApp": {
+    "solarSystem": {
+      "home": {
+        "title": "Solar Systems",
+        "createLabel": "Maak een nieuwe Solar System",
+        "createOrEditLabel": "Maak of wijzig een Solar System",
+        "notFound": "No Solar Systems found"
+      },
+      "created": "A new Solar System is created with identifier {{ param }}",
+      "updated": "A Solar System is updated with identifier {{ param }}",
+      "deleted": "A Solar System is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Solar System {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Solar System"
+      },
+      "name": "Name",
+      "galaxy": "Galaxy",
+      "worldOrigin": "World Origin"
+    }
+  }
+}

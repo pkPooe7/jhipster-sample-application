@@ -1,0 +1,23 @@
+{
+  "sampleApp": {
+    "dominantHand": {
+      "home": {
+        "title": "DominantHands",
+        "createLabel": "Dominant Hand を追加",
+        "createOrEditLabel": "Dominant Handを追加または編集",
+        "notFound": "No Dominant Hands found"
+      },
+      "created": "A new Dominant Hand is created with identifier {{ param }}",
+      "updated": "A Dominant Hand is updated with identifier {{ param }}",
+      "deleted": "A Dominant Hand is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Dominant Hand {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Dominant Hand"
+      },
+      "hand": "Hand",
+      "primaryHand": "Primary Hand"
+    }
+  }
+}

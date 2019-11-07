@@ -1,0 +1,25 @@
+{
+  "sampleApp": {
+    "technology": {
+      "home": {
+        "title": "Technologies",
+        "createLabel": "Technology を追加",
+        "createOrEditLabel": "Technologyを追加または編集",
+        "notFound": "No Technologies found"
+      },
+      "created": "A new Technology is created with identifier {{ param }}",
+      "updated": "A Technology is updated with identifier {{ param }}",
+      "deleted": "A Technology is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Technology {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Technology"
+      },
+      "name": "Name",
+      "aquired": "Aquired",
+      "speci": "Speci",
+      "speciesTech": "Species Tech"
+    }
+  }
+}

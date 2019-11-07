@@ -9,15 +9,41 @@
                 "required"
             ],
             "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "species",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "planet",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 50
         }
     ],
     "relationships": [
         {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "classification",
+            "otherEntityRelationshipName": "alien",
+            "relationshipName": "catergory",
+            "otherEntityField": "species",
+            "ownerSide": true
+        },
+        {
             "relationshipType": "many-to-one",
             "otherEntityName": "world",
-            "otherEntityRelationshipName": "alien",
+            "otherEntityRelationshipName": "alienWorld",
             "relationshipName": "homeWorld",
-            "otherEntityField": "name"
+            "otherEntityField": "planet"
         }
     ],
     "changelogDate": "20191107092947",

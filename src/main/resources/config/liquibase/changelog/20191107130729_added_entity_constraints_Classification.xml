@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Classification.
+    -->
+    <changeSet id="20191107130729-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="dominant_hand_id"
+                                 baseTableName="classification"
+                                 constraintName="fk_classification_dominant_hand_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dominant_hand"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,29 @@
+{
+    "name": "DominantHand",
+    "fields": [
+        {
+            "fieldName": "hand",
+            "fieldType": "Hands",
+            "fieldValues": "LEFT,RIGHT"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "classification",
+            "otherEntityRelationshipName": "dominantHand",
+            "relationshipName": "primaryHand",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20191107130731",
+    "entityTableName": "dominant_hand",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

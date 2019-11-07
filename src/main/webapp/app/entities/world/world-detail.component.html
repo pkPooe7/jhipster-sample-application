@@ -9,6 +9,16 @@
                 <dd>
                     <span>{{world.name}}</span>
                 </dd>
+                <dt><span jhiTranslate="sampleApp.world.system">System</span></dt>
+                <dd>
+                    <span>{{world.system}}</span>
+                </dd>
+                <dt><span jhiTranslate="sampleApp.world.homeSystem">Home System</span></dt>
+                <dd>
+                    <div *ngIf="world.homeSystem">
+                        <a [routerLink]="['/solar-system', world.homeSystem?.id, 'view']">{{world.homeSystem?.system}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

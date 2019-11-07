@@ -9,10 +9,24 @@
                 <dd>
                     <span>{{alien.name}}</span>
                 </dd>
+                <dt><span jhiTranslate="sampleApp.alien.species">Species</span></dt>
+                <dd>
+                    <span>{{alien.species}}</span>
+                </dd>
+                <dt><span jhiTranslate="sampleApp.alien.planet">Planet</span></dt>
+                <dd>
+                    <span>{{alien.planet}}</span>
+                </dd>
+                <dt><span jhiTranslate="sampleApp.alien.catergory">Catergory</span></dt>
+                <dd>
+                    <div *ngIf="alien.catergory">
+                        <a [routerLink]="['/classification', alien.catergory?.id, 'view']">{{alien.catergory?.species}}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="sampleApp.alien.homeWorld">Home World</span></dt>
                 <dd>
                     <div *ngIf="alien.homeWorld">
-                        <a [routerLink]="['/world', alien.homeWorld?.id, 'view']">{{alien.homeWorld?.name}}</a>
+                        <a [routerLink]="['/world', alien.homeWorld?.id, 'view']">{{alien.homeWorld?.planet}}</a>
                     </div>
                 </dd>
             </dl>

@@ -9,6 +9,8 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IAlien, Alien } from 'app/shared/model/alien.model';
 import { AlienService } from './alien.service';
+import { IClassification } from 'app/shared/model/classification.model';
+import { ClassificationService } from 'app/entities/classification/classification.service';
 import { IWorld } from 'app/shared/model/world.model';
 import { WorldService } from 'app/entities/world/world.service';
 
@@ -19,17 +21,23 @@ import { WorldService } from 'app/entities/world/world.service';
 export class AlienUpdateComponent implements OnInit {
   isSaving: boolean;
 
+  catergories: IClassification[];
+
   worlds: IWorld[];
 
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required, Validators.maxLength(50)]],
+    species: [null, [Validators.required, Validators.maxLength(50)]],
+    planet: [null, [Validators.required, Validators.maxLength(50)]],
+    catergory: [],
     homeWorld: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected alienService: AlienService,
+    protected classificationService: ClassificationService,
     protected worldService: WorldService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -40,6 +48,31 @@ export class AlienUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ alien }) => {
       this.updateForm(alien);
     });
+    this.classificationService
+      .query({ filter: 'alien-is-null' })
+      .pipe(
+        filter((mayBeOk: HttpResponse<IClassification[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IClassification[]>) => response.body)
+      )
+      .subscribe(
+        (res: IClassification[]) => {
+          if (!this.editForm.get('catergory').value || !this.editForm.get('catergory').value.id) {
+            this.catergories = res;
+          } else {
+            this.classificationService
+              .find(this.editForm.get('catergory').value.id)
+              .pipe(
+                filter((subResMayBeOk: HttpResponse<IClassification>) => subResMayBeOk.ok),
+                map((subResponse: HttpResponse<IClassification>) => subResponse.body)
+              )
+              .subscribe(
+                (subRes: IClassification) => (this.catergories = [subRes].concat(res)),
+                (subRes: HttpErrorResponse) => this.onError(subRes.message)
+              );
+          }
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
     this.worldService
       .query()
       .pipe(
@@ -53,6 +86,9 @@ export class AlienUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: alien.id,
       name: alien.name,
+      species: alien.species,
+      planet: alien.planet,
+      catergory: alien.catergory,
       homeWorld: alien.homeWorld
     });
   }
@@ -76,6 +112,9 @@ export class AlienUpdateComponent implements OnInit {
       ...new Alien(),
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
+      species: this.editForm.get(['species']).value,
+      planet: this.editForm.get(['planet']).value,
+      catergory: this.editForm.get(['catergory']).value,
       homeWorld: this.editForm.get(['homeWorld']).value
     };
   }
@@ -94,6 +133,10 @@ export class AlienUpdateComponent implements OnInit {
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackClassificationById(index: number, item: IClassification) {
+    return item.id;
   }
 
   trackWorldById(index: number, item: IWorld) {

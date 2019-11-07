@@ -1,0 +1,23 @@
+{
+  "sampleApp": {
+    "dominantHand": {
+      "home": {
+        "title": "Dominant Hands",
+        "createLabel": "Create a new Dominant Hand",
+        "createOrEditLabel": "Create or edit a Dominant Hand",
+        "notFound": "No Dominant Hands found"
+      },
+      "created": "A new Dominant Hand is created with identifier {{ param }}",
+      "updated": "A Dominant Hand is updated with identifier {{ param }}",
+      "deleted": "A Dominant Hand is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dominant Hand {{ id }}?"
+      },
+      "detail": {
+        "title": "Dominant Hand"
+      },
+      "hand": "Hand",
+      "primaryHand": "Primary Hand"
+    }
+  }
+}

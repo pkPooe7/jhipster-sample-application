@@ -1,0 +1,24 @@
+{
+  "sampleApp": {
+    "solarSystem": {
+      "home": {
+        "title": "SolarSystems",
+        "createLabel": "Solar System を追加",
+        "createOrEditLabel": "Solar Systemを追加または編集",
+        "notFound": "No Solar Systems found"
+      },
+      "created": "A new Solar System is created with identifier {{ param }}",
+      "updated": "A Solar System is updated with identifier {{ param }}",
+      "deleted": "A Solar System is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Solar System {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Solar System"
+      },
+      "name": "Name",
+      "galaxy": "Galaxy",
+      "worldOrigin": "World Origin"
+    }
+  }
+}
