@@ -7,6 +7,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'alien',
         loadChildren: () => import('./alien/alien.module').then(m => m.SampleAppAlienModule)
+      },
+      {
+        path: 'world',
+        loadChildren: () => import('./world/world.module').then(m => m.SampleAppWorldModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

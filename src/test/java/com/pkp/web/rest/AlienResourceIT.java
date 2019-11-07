@@ -36,9 +36,6 @@ public class AlienResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_HOME_PLANET = "AAAAAAAAAA";
-    private static final String UPDATED_HOME_PLANET = "BBBBBBBBBB";
-
     @Autowired
     private AlienRepository alienRepository;
 
@@ -81,8 +78,7 @@ public class AlienResourceIT {
      */
     public static Alien createEntity(EntityManager em) {
         Alien alien = new Alien()
-            .name(DEFAULT_NAME)
-            .homePlanet(DEFAULT_HOME_PLANET);
+            .name(DEFAULT_NAME);
         return alien;
     }
     /**
@@ -93,8 +89,7 @@ public class AlienResourceIT {
      */
     public static Alien createUpdatedEntity(EntityManager em) {
         Alien alien = new Alien()
-            .name(UPDATED_NAME)
-            .homePlanet(UPDATED_HOME_PLANET);
+            .name(UPDATED_NAME);
         return alien;
     }
 
@@ -119,7 +114,6 @@ public class AlienResourceIT {
         assertThat(alienList).hasSize(databaseSizeBeforeCreate + 1);
         Alien testAlien = alienList.get(alienList.size() - 1);
         assertThat(testAlien.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testAlien.getHomePlanet()).isEqualTo(DEFAULT_HOME_PLANET);
     }
 
     @Test
@@ -144,6 +138,24 @@ public class AlienResourceIT {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = alienRepository.findAll().size();
+        // set the field null
+        alien.setName(null);
+
+        // Create the Alien, which fails.
+
+        restAlienMockMvc.perform(post("/api/aliens")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(alien)))
+            .andExpect(status().isBadRequest());
+
+        List<Alien> alienList = alienRepository.findAll();
+        assertThat(alienList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllAliens() throws Exception {
         // Initialize the database
         alienRepository.saveAndFlush(alien);
@@ -153,8 +165,7 @@ public class AlienResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(alien.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].homePlanet").value(hasItem(DEFAULT_HOME_PLANET)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -168,8 +179,7 @@ public class AlienResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(alien.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.homePlanet").value(DEFAULT_HOME_PLANET));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
@@ -193,8 +203,7 @@ public class AlienResourceIT {
         // Disconnect from session so that the updates on updatedAlien are not directly saved in db
         em.detach(updatedAlien);
         updatedAlien
-            .name(UPDATED_NAME)
-            .homePlanet(UPDATED_HOME_PLANET);
+            .name(UPDATED_NAME);
 
         restAlienMockMvc.perform(put("/api/aliens")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -206,7 +215,6 @@ public class AlienResourceIT {
         assertThat(alienList).hasSize(databaseSizeBeforeUpdate);
         Alien testAlien = alienList.get(alienList.size() - 1);
         assertThat(testAlien.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testAlien.getHomePlanet()).isEqualTo(UPDATED_HOME_PLANET);
     }
 
     @Test

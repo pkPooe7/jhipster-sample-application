@@ -1,0 +1,23 @@
+{
+  "sampleApp": {
+    "world": {
+      "home": {
+        "title": "Worlds",
+        "createLabel": "Maak een nieuwe World",
+        "createOrEditLabel": "Maak of wijzig een World",
+        "notFound": "No Worlds found"
+      },
+      "created": "A new World is created with identifier {{ param }}",
+      "updated": "A World is updated with identifier {{ param }}",
+      "deleted": "A World is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u World {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "World"
+      },
+      "name": "Name",
+      "alien": "Alien"
+    }
+  }
+}

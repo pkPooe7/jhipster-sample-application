@@ -1,0 +1,23 @@
+{
+  "sampleApp": {
+    "alien": {
+      "home": {
+        "title": "Aliens",
+        "createLabel": "Maak een nieuwe Alien",
+        "createOrEditLabel": "Maak of wijzig een Alien",
+        "notFound": "No Aliens found"
+      },
+      "created": "A new Alien is created with identifier {{ param }}",
+      "updated": "A Alien is updated with identifier {{ param }}",
+      "deleted": "A Alien is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Alien {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Alien"
+      },
+      "name": "Name",
+      "homeWorld": "Home World"
+    }
+  }
+}

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { JhiLanguageService } from 'ng-jhipster';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
+import { JhiLanguageHelper } from 'app/core/language/language.helper';
 
 @Component({
   selector: 'jhi-settings',
@@ -11,6 +13,7 @@ import { Account } from 'app/core/user/account.model';
 export class SettingsComponent implements OnInit {
   error: string;
   success: string;
+  languages: any[];
   settingsForm = this.fb.group({
     firstName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
     lastName: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
@@ -22,12 +25,18 @@ export class SettingsComponent implements OnInit {
     imageUrl: []
   });
 
-  constructor(private accountService: AccountService, private fb: FormBuilder) {}
+  constructor(
+    private accountService: AccountService,
+    private fb: FormBuilder,
+    private languageService: JhiLanguageService,
+    private languageHelper: JhiLanguageHelper
+  ) {}
 
   ngOnInit() {
     this.accountService.identity().subscribe(account => {
       this.updateForm(account);
     });
+    this.languages = this.languageHelper.getAll();
   }
 
   save() {
@@ -38,6 +47,11 @@ export class SettingsComponent implements OnInit {
         this.success = 'OK';
         this.accountService.identity(true).subscribe(account => {
           this.updateForm(account);
+        });
+        this.languageService.getCurrent().then(current => {
+          if (settingsAccount.langKey !== current) {
+            this.languageService.changeLanguage(settingsAccount.langKey);
+          }
         });
       },
       () => {

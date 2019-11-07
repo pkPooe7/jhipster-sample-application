@@ -1,14 +1,16 @@
 {
   "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.pkp",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.4.1",
     "applicationType": "monolith",
-    "gitCompany": "",
     "baseName": "sampleApp",
     "packageName": "com.pkp",
     "packageFolder": "com/pkp",
-    "serverPort": 8080,
-    "serviceDiscoveryType": false,
+    "serverPort": "8080",
     "authenticationType": "session",
-    "uaaBaseName": "../uaa",
     "cacheProvider": "ehcache",
     "enableHibernateCache": true,
     "websocket": false,
@@ -16,29 +18,25 @@
     "devDatabaseType": "h2Disk",
     "prodDatabaseType": "mysql",
     "searchEngine": false,
-    "enableSwaggerCodegen": false,
     "messageBroker": false,
+    "serviceDiscoveryType": false,
     "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "rememberMeKey": "6500ac4a55bfdc763a4c37d01ff3af8cded11818509eb29245acc391a3203c67c02598f7fd377381c1633246f13a1641bef3",
+    "embeddableLaunchScript": false,
     "useSass": true,
     "clientPackageManager": "npm",
-    "testFrameworks": [],
-    "enableTranslation": false,
-    "nativeLanguage": "en",
-    "languages": [
-      "en"
-    ],
     "clientFramework": "angularX",
+    "clientTheme": "lux",
+    "clientThemeVariant": "dark",
+    "testFrameworks": [],
     "jhiPrefix": "jhi",
-    "jhipsterVersion": "6.4.1",
-    "rememberMeKey": "8e76d1543bcf9e9b428a39ebbdcb05ca7983c9177e8215a8006751459a8ec1de09407188435aa8f114aa481e830ab0cee4d2",
-    "embeddableLaunchScript": false,
-    "clientTheme": "none",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
     "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": ["en", "nl", "ja"],
     "blueprints": []
-  },
-  "git-provider": "GitHub",
-  "git-company": "pkPooe7",
-  "repository-name": "jhipster-sample-application"
+  }
 }

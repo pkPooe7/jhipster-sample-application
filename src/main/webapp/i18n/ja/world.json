@@ -1,0 +1,23 @@
+{
+  "sampleApp": {
+    "world": {
+      "home": {
+        "title": "Worlds",
+        "createLabel": "World を追加",
+        "createOrEditLabel": "Worldを追加または編集",
+        "notFound": "No Worlds found"
+      },
+      "created": "A new World is created with identifier {{ param }}",
+      "updated": "A World is updated with identifier {{ param }}",
+      "deleted": "A World is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "World {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "World"
+      },
+      "name": "Name",
+      "alien": "Alien"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 package com.pkp.domain;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -21,12 +22,14 @@ public class Alien implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Size(max = 50)
-    @Column(name = "name", length = 50)
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
 
-    @Column(name = "home_planet")
-    private String homePlanet;
+    @ManyToOne
+    @JsonIgnoreProperties("aliens")
+    private World homeWorld;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -50,17 +53,17 @@ public class Alien implements Serializable {
         this.name = name;
     }
 
-    public String getHomePlanet() {
-        return homePlanet;
+    public World getHomeWorld() {
+        return homeWorld;
     }
 
-    public Alien homePlanet(String homePlanet) {
-        this.homePlanet = homePlanet;
+    public Alien homeWorld(World world) {
+        this.homeWorld = world;
         return this;
     }
 
-    public void setHomePlanet(String homePlanet) {
-        this.homePlanet = homePlanet;
+    public void setHomeWorld(World world) {
+        this.homeWorld = world;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -85,7 +88,6 @@ public class Alien implements Serializable {
         return "Alien{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", homePlanet='" + getHomePlanet() + "'" +
             "}";
     }
 }

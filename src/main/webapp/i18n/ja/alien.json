@@ -1,0 +1,23 @@
+{
+  "sampleApp": {
+    "alien": {
+      "home": {
+        "title": "Aliens",
+        "createLabel": "Alien を追加",
+        "createOrEditLabel": "Alienを追加または編集",
+        "notFound": "No Aliens found"
+      },
+      "created": "A new Alien is created with identifier {{ param }}",
+      "updated": "A Alien is updated with identifier {{ param }}",
+      "deleted": "A Alien is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Alien {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Alien"
+      },
+      "name": "Name",
+      "homeWorld": "Home World"
+    }
+  }
+}

@@ -5,8 +5,12 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { JhiAlertService } from 'ng-jhipster';
 import { IAlien, Alien } from 'app/shared/model/alien.model';
 import { AlienService } from './alien.service';
+import { IWorld } from 'app/shared/model/world.model';
+import { WorldService } from 'app/entities/world/world.service';
 
 @Component({
   selector: 'jhi-alien-update',
@@ -15,26 +19,41 @@ import { AlienService } from './alien.service';
 export class AlienUpdateComponent implements OnInit {
   isSaving: boolean;
 
+  worlds: IWorld[];
+
   editForm = this.fb.group({
     id: [],
-    name: [null, [Validators.maxLength(50)]],
-    homePlanet: []
+    name: [null, [Validators.required, Validators.maxLength(50)]],
+    homeWorld: []
   });
 
-  constructor(protected alienService: AlienService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected jhiAlertService: JhiAlertService,
+    protected alienService: AlienService,
+    protected worldService: WorldService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ alien }) => {
       this.updateForm(alien);
     });
+    this.worldService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IWorld[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IWorld[]>) => response.body)
+      )
+      .subscribe((res: IWorld[]) => (this.worlds = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(alien: IAlien) {
     this.editForm.patchValue({
       id: alien.id,
       name: alien.name,
-      homePlanet: alien.homePlanet
+      homeWorld: alien.homeWorld
     });
   }
 
@@ -57,7 +76,7 @@ export class AlienUpdateComponent implements OnInit {
       ...new Alien(),
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
-      homePlanet: this.editForm.get(['homePlanet']).value
+      homeWorld: this.editForm.get(['homeWorld']).value
     };
   }
 
@@ -72,5 +91,12 @@ export class AlienUpdateComponent implements OnInit {
 
   protected onSaveError() {
     this.isSaving = false;
+  }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackWorldById(index: number, item: IWorld) {
+    return item.id;
   }
 }

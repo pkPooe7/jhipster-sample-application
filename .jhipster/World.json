@@ -1,0 +1,32 @@
+{
+    "name": "World",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "alien",
+            "otherEntityRelationshipName": "homeWorld",
+            "relationshipName": "alien"
+        }
+    ],
+    "changelogDate": "20191107092948",
+    "entityTableName": "world",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

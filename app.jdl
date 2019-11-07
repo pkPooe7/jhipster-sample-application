@@ -1,0 +1,9 @@
+entity Alien {
+  name String maxlength(50) required
+}
+entity World {
+  name String maxlength(50) required
+}
+relationship OneToMany {
+  World{alien(name)} to Alien{homeWorld(name)}
+}

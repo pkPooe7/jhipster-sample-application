@@ -1,27 +1,33 @@
 {
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "relationships": [],
+    "name": "Alien",
     "fields": [
         {
             "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
-                "maxlength"
+                "maxlength",
+                "required"
             ],
-            "fieldValidateRulesMaxlength": "50"
-        },
-        {
-            "fieldName": "homePlanet",
-            "fieldType": "String"
+            "fieldValidateRulesMaxlength": 50
         }
     ],
-    "changelogDate": "20191106083630",
-    "dto": "no",
-    "searchEngine": false,
-    "service": "no",
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "world",
+            "otherEntityRelationshipName": "alien",
+            "relationshipName": "homeWorld",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20191107092947",
     "entityTableName": "alien",
-    "databaseType": "sql",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
     "jpaMetamodelFiltering": false,
-    "pagination": "no"
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
 }
