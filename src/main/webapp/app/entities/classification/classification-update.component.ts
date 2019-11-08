@@ -9,8 +9,6 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IClassification, Classification } from 'app/shared/model/classification.model';
 import { ClassificationService } from './classification.service';
-import { IDominantHand } from 'app/shared/model/dominant-hand.model';
-import { DominantHandService } from 'app/entities/dominant-hand/dominant-hand.service';
 import { IAlien } from 'app/shared/model/alien.model';
 import { AlienService } from 'app/entities/alien/alien.service';
 import { ITechnology } from 'app/shared/model/technology.model';
@@ -23,8 +21,6 @@ import { TechnologyService } from 'app/entities/technology/technology.service';
 export class ClassificationUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  dominanthands: IDominantHand[];
-
   aliens: IAlien[];
 
   technologies: ITechnology[];
@@ -32,14 +28,12 @@ export class ClassificationUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required, Validators.maxLength(50)]],
-    handed: [null, [Validators.required, Validators.maxLength(50)]],
-    dominantHand: []
+    handed: [null, [Validators.required]]
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected classificationService: ClassificationService,
-    protected dominantHandService: DominantHandService,
     protected alienService: AlienService,
     protected technologyService: TechnologyService,
     protected activatedRoute: ActivatedRoute,
@@ -51,31 +45,6 @@ export class ClassificationUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ classification }) => {
       this.updateForm(classification);
     });
-    this.dominantHandService
-      .query({ filter: 'primaryhand-is-null' })
-      .pipe(
-        filter((mayBeOk: HttpResponse<IDominantHand[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IDominantHand[]>) => response.body)
-      )
-      .subscribe(
-        (res: IDominantHand[]) => {
-          if (!this.editForm.get('dominantHand').value || !this.editForm.get('dominantHand').value.id) {
-            this.dominanthands = res;
-          } else {
-            this.dominantHandService
-              .find(this.editForm.get('dominantHand').value.id)
-              .pipe(
-                filter((subResMayBeOk: HttpResponse<IDominantHand>) => subResMayBeOk.ok),
-                map((subResponse: HttpResponse<IDominantHand>) => subResponse.body)
-              )
-              .subscribe(
-                (subRes: IDominantHand) => (this.dominanthands = [subRes].concat(res)),
-                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-              );
-          }
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
     this.alienService
       .query()
       .pipe(
@@ -96,8 +65,7 @@ export class ClassificationUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: classification.id,
       name: classification.name,
-      handed: classification.handed,
-      dominantHand: classification.dominantHand
+      handed: classification.handed
     });
   }
 
@@ -120,8 +88,7 @@ export class ClassificationUpdateComponent implements OnInit {
       ...new Classification(),
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
-      handed: this.editForm.get(['handed']).value,
-      dominantHand: this.editForm.get(['dominantHand']).value
+      handed: this.editForm.get(['handed']).value
     };
   }
 
@@ -139,10 +106,6 @@ export class ClassificationUpdateComponent implements OnInit {
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
-  }
-
-  trackDominantHandById(index: number, item: IDominantHand) {
-    return item.id;
   }
 
   trackAlienById(index: number, item: IAlien) {

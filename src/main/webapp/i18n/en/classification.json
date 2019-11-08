@@ -18,8 +18,7 @@
       },
       "name": "Name",
       "handed": "Handed",
-      "dominantHand": "Dominant Hand",
-      "alien": "Alien",
+      "type": "Type",
       "raceName": "Race Name"
     }
   }

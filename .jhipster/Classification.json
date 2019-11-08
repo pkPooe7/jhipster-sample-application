@@ -12,28 +12,19 @@
         },
         {
             "fieldName": "handed",
-            "fieldType": "String",
+            "fieldType": "Hands",
+            "fieldValues": "LEFT,RIGHT",
             "fieldValidateRules": [
-                "maxlength",
                 "required"
-            ],
-            "fieldValidateRulesMaxlength": 50
+            ]
         }
     ],
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "otherEntityName": "dominantHand",
-            "otherEntityRelationshipName": "primaryHand",
-            "relationshipName": "dominantHand",
-            "otherEntityField": "handed",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "one-to-one",
             "otherEntityName": "alien",
             "otherEntityRelationshipName": "catergory",
-            "relationshipName": "alien",
+            "relationshipName": "type",
             "ownerSide": false
         },
         {

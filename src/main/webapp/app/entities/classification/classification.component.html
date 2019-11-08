@@ -21,7 +21,6 @@
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
             <th scope="col" ><span jhiTranslate="sampleApp.classification.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="sampleApp.classification.handed">Handed</span></th>
-            <th scope="col" ><span jhiTranslate="sampleApp.classification.dominantHand">Dominant Hand</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -29,12 +28,7 @@
             <tr *ngFor="let classification of classifications ;trackBy: trackId">
                 <td><a [routerLink]="['/classification', classification.id, 'view' ]">{{classification.id}}</a></td>
                 <td>{{classification.name}}</td>
-                <td>{{classification.handed}}</td>
-                <td>
-                    <div *ngIf="classification.dominantHand">
-                        <a [routerLink]="['/dominant-hand', classification.dominantHand?.id, 'view' ]" >{{classification.dominantHand?.handed}}</a>
-                    </div>
-                </td>
+                <td jhiTranslate="{{'sampleApp.Hands.' + classification.handed}}">{{classification.handed}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

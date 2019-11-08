@@ -49,7 +49,7 @@ export class AlienUpdateComponent implements OnInit {
       this.updateForm(alien);
     });
     this.classificationService
-      .query({ filter: 'alien-is-null' })
+      .query({ filter: 'type-is-null' })
       .pipe(
         filter((mayBeOk: HttpResponse<IClassification[]>) => mayBeOk.ok),
         map((response: HttpResponse<IClassification[]>) => response.body)

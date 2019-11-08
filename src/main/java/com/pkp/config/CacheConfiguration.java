@@ -54,7 +54,6 @@ public class CacheConfiguration {
             createCache(cm, com.pkp.domain.Classification.class.getName() + ".raceNames");
             createCache(cm, com.pkp.domain.Technology.class.getName());
             createCache(cm, com.pkp.domain.Technology.class.getName() + ".speciesTeches");
-            createCache(cm, com.pkp.domain.DominantHand.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

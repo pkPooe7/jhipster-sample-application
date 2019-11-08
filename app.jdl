@@ -1,3 +1,8 @@
+//What is their dominant side(hands)
+enum Hands {
+	LEFT, RIGHT
+}
+
 entity Alien {
   name String maxlength(50) required
   species String maxlength(50) required
@@ -14,10 +19,10 @@ entity SolarSystem {
  galaxy String maxlength(50) required 
 }
 
-//A alien belongs to a single species(debateable)
+//A alien belongs to a single species
 entity Classification {
  name String maxlength(50) required
- handed String maxlength(50) required
+ handed Hands required
 }
 
 //Each species has mastered some sort of tech
@@ -27,31 +32,22 @@ entity Technology {
  speci String maxlength(50) required
 }
 
-//What is their dominant side(hands)
-enum Hands {
-	LEFT, RIGHT
-}
-//Need to declare the enum 
-entity DominantHand {
-	hand Hands
-}
-
 relationship OneToOne {
- Alien{catergory(species)} to Classification{alien(name)}
+ Alien{catergory(species)} to 
+ Classification{type(name)}
 }
 
 relationship OneToMany {
-  World{alienWorld(name)} to Alien{homeWorld(planet)}
+  World{alienWorld(name)} to 
+  Alien{homeWorld(planet)}
 }
 
 relationship OneToMany {
- SolarSystem{worldOrigin(name)} to World{homeSystem(system)}
-}
-
-relationship OneToOne {
- Classification{dominantHand(handed)} to DominantHand{primaryHand(hand)}
+ SolarSystem{worldOrigin(name)} to 
+ World{homeSystem(system)}
 }
 
 relationship ManyToMany {
-	Technology{speciesTech(speci)} to Classification{raceName(name)}
+	Technology{speciesTech(speci)} to
+    Classification{raceName(name)}
 }

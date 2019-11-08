@@ -1,23 +1,15 @@
-import { IDominantHand } from 'app/shared/model/dominant-hand.model';
 import { IAlien } from 'app/shared/model/alien.model';
 import { ITechnology } from 'app/shared/model/technology.model';
+import { Hands } from 'app/shared/model/enumerations/hands.model';
 
 export interface IClassification {
   id?: number;
   name?: string;
-  handed?: string;
-  dominantHand?: IDominantHand;
-  alien?: IAlien;
+  handed?: Hands;
+  type?: IAlien;
   raceNames?: ITechnology[];
 }
 
 export class Classification implements IClassification {
-  constructor(
-    public id?: number,
-    public name?: string,
-    public handed?: string,
-    public dominantHand?: IDominantHand,
-    public alien?: IAlien,
-    public raceNames?: ITechnology[]
-  ) {}
+  constructor(public id?: number, public name?: string, public handed?: Hands, public type?: IAlien, public raceNames?: ITechnology[]) {}
 }

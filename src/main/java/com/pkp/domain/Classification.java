@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.pkp.domain.enumeration.Hands;
+
 /**
  * A Classification.
  */
@@ -30,17 +32,13 @@ public class Classification implements Serializable {
     private String name;
 
     @NotNull
-    @Size(max = 50)
-    @Column(name = "handed", length = 50, nullable = false)
-    private String handed;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private DominantHand dominantHand;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "handed", nullable = false)
+    private Hands handed;
 
     @OneToOne(mappedBy = "catergory")
     @JsonIgnore
-    private Alien alien;
+    private Alien type;
 
     @ManyToMany(mappedBy = "speciesTeches")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -69,43 +67,30 @@ public class Classification implements Serializable {
         this.name = name;
     }
 
-    public String getHanded() {
+    public Hands getHanded() {
         return handed;
     }
 
-    public Classification handed(String handed) {
+    public Classification handed(Hands handed) {
         this.handed = handed;
         return this;
     }
 
-    public void setHanded(String handed) {
+    public void setHanded(Hands handed) {
         this.handed = handed;
     }
 
-    public DominantHand getDominantHand() {
-        return dominantHand;
+    public Alien getType() {
+        return type;
     }
 
-    public Classification dominantHand(DominantHand dominantHand) {
-        this.dominantHand = dominantHand;
+    public Classification type(Alien alien) {
+        this.type = alien;
         return this;
     }
 
-    public void setDominantHand(DominantHand dominantHand) {
-        this.dominantHand = dominantHand;
-    }
-
-    public Alien getAlien() {
-        return alien;
-    }
-
-    public Classification alien(Alien alien) {
-        this.alien = alien;
-        return this;
-    }
-
-    public void setAlien(Alien alien) {
-        this.alien = alien;
+    public void setType(Alien alien) {
+        this.type = alien;
     }
 
     public Set<Technology> getRaceNames() {

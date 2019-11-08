@@ -90,11 +90,11 @@ public class ClassificationResource {
      */
     @GetMapping("/classifications")
     public List<Classification> getAllClassifications(@RequestParam(required = false) String filter) {
-        if ("alien-is-null".equals(filter)) {
-            log.debug("REST request to get all Classifications where alien is null");
+        if ("type-is-null".equals(filter)) {
+            log.debug("REST request to get all Classifications where type is null");
             return StreamSupport
                 .stream(classificationRepository.findAll().spliterator(), false)
-                .filter(classification -> classification.getAlien() == null)
+                .filter(classification -> classification.getType() == null)
                 .collect(Collectors.toList());
         }
         log.debug("REST request to get all Classifications");

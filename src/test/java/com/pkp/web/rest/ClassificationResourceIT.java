@@ -27,6 +27,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.pkp.domain.enumeration.Hands;
 /**
  * Integration tests for the {@link ClassificationResource} REST controller.
  */
@@ -36,8 +37,8 @@ public class ClassificationResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_HANDED = "AAAAAAAAAA";
-    private static final String UPDATED_HANDED = "BBBBBBBBBB";
+    private static final Hands DEFAULT_HANDED = Hands.LEFT;
+    private static final Hands UPDATED_HANDED = Hands.RIGHT;
 
     @Autowired
     private ClassificationRepository classificationRepository;
@@ -190,7 +191,7 @@ public class ClassificationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(classification.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].handed").value(hasItem(DEFAULT_HANDED)));
+            .andExpect(jsonPath("$.[*].handed").value(hasItem(DEFAULT_HANDED.toString())));
     }
     
     @Test
@@ -205,7 +206,7 @@ public class ClassificationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(classification.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.handed").value(DEFAULT_HANDED));
+            .andExpect(jsonPath("$.handed").value(DEFAULT_HANDED.toString()));
     }
 
     @Test

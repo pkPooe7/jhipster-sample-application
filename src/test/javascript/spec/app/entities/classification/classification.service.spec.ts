@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { take, map } from 'rxjs/operators';
 import { ClassificationService } from 'app/entities/classification/classification.service';
 import { IClassification, Classification } from 'app/shared/model/classification.model';
+import { Hands } from 'app/shared/model/enumerations/hands.model';
 
 describe('Service Tests', () => {
   describe('Classification Service', () => {
@@ -20,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(ClassificationService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Classification(0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Classification(0, 'AAAAAAA', Hands.LEFT);
     });
 
     describe('Service methods', () => {

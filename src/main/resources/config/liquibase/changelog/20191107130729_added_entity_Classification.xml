@@ -19,11 +19,8 @@
             <column name="name" type="varchar(50)">
                 <constraints nullable="false" />
             </column>
-            <column name="handed" type="varchar(50)">
+            <column name="handed" type="varchar(255)">
                 <constraints nullable="false" />
-            </column>
-            <column name="dominant_hand_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_classification_dominant_hand_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>

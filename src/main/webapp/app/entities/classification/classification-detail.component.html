@@ -11,13 +11,7 @@
                 </dd>
                 <dt><span jhiTranslate="sampleApp.classification.handed">Handed</span></dt>
                 <dd>
-                    <span>{{classification.handed}}</span>
-                </dd>
-                <dt><span jhiTranslate="sampleApp.classification.dominantHand">Dominant Hand</span></dt>
-                <dd>
-                    <div *ngIf="classification.dominantHand">
-                        <a [routerLink]="['/dominant-hand', classification.dominantHand?.id, 'view']">{{classification.dominantHand?.handed}}</a>
-                    </div>
+                    <span jhiTranslate="{{'sampleApp.Hands.' + classification.handed}}">{{classification.handed}}</span>
                 </dd>
             </dl>
 
